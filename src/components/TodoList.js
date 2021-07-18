@@ -1,29 +1,25 @@
-import './Todo.css';
+const TodoList = ({ todos, handleDelete, setTodos }) => {
 
-
-const TodoList = ({ todos, setTodos }) => {
-
-    const handleDelete = index => {
-        const newTodos = [...todos]
-        // console.log(newTodos)
-        newTodos.splice(index, 1);
+    const handleIsComplete = (index) => {
+        const newTodos = [...todos];
+        newTodos[index].isComplete = !newTodos[index].isComplete;
         setTodos(newTodos);
     }
 
-
     return (
         <section className="">
-            {todos && todos.map(todo =>
-                <div key={todo.id} className="todo">
-                    <div>
-                        <div className="todo__check"></div>
-                        <p className="todo__text" >{todo.title}, {todo.id}</p>
+            {/* !!! IMPORTANT !!! ici index est une valeure automatique lorsqu'elle est passée dans map, elle génère un ID pour chaque map. C'est une des propriété de la méthode .map */}
+            {todos && todos.map((todo, index) =>
+                <div key={index} className="todo">
+                    <div onClick={() => handleIsComplete(index)}>
+                        <div className={todo.isComplete ? "todo__check--isComplete todo__check" : "todo__check"}></div>
+                        <p className={todo.isComplete ? "todo__text--isComplete todo__text" : "todo__text"} >{todo.title}</p>
                     </div>
                     <i onClick={() => handleDelete(index)} className="todo__delete fas fa-slash"><i className="todo__delete--effect fas fa-slash"></i></i>
                 </div>
             )}
         </section>
-    );
+    )
 
 }
 

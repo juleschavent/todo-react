@@ -56,25 +56,6 @@
     color: white;
 }
 
-/* when todo is checked */
-.todo__check--isComplete {
-    width: 2rem;
-    height: 2rem;
-    background: radial-gradient(circle, rgb(201, 211, 255) 0%, rgb(99, 125, 255) 100%);
-    text-shadow: 0 .2rem .2rem black;
-    border-radius: 50%;
-    margin-right: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5rem;
-}
-
-.todo__text--isComplete {
-    text-decoration: line-through;
-    color: rgba(146, 146, 146, 0.616);
-}
-
 /* when todo isn't checked */
 .todo__check {
     width: 2rem;
@@ -98,6 +79,26 @@
     font-size: 1.3rem;
     font-weight: 300;
     letter-spacing: .5rem;
+
+}
+
+/* when todo is checked */
+.todo__check--isComplete {
+    width: 2rem;
+    height: 2rem;
+    background: radial-gradient(circle, rgb(201, 211, 255) 0%, rgb(99, 125, 255) 100%);
+    text-shadow: 0 .2rem .2rem black;
+    border-radius: 50%;
+    margin-right: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+}
+
+.todo__text--isComplete {
+    text-decoration: line-through;
+    color: rgba(146, 146, 146, 0.616);
 }
 
 /* delete a todo */
