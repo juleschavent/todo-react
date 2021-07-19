@@ -3,9 +3,21 @@
     background-color: rgb(21, 23, 32);
 }
 
+.signIn {
+    padding-top: 2rem;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    text-align: center;
+}
+
+.signIn__title {
+    color: white;
+}
+
 .header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     color: rgb(245, 245, 245);
     min-height: 15rem;
@@ -21,6 +33,19 @@
     letter-spacing: 1.5rem;
 }
 
-.header__icon {
-    font-size: 2rem;
+.user {
+    text-align: right;
+}
+
+.user__logout {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: .1s ease;
+}
+
+.user__logout:hover {
+    transform: scale(1.2);
+    transform-origin: top right;
 }

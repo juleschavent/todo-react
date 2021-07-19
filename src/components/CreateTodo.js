@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import firebase from "../utils/firebaseConfig";
 
 const CreateTodo = ({ setTodos, todos }) => {
 
@@ -10,12 +11,15 @@ const CreateTodo = ({ setTodos, todos }) => {
 
     const handleTodoList = (e) => {
         e.preventDefault();
-        setTodos([{
-            title: inputTodo,
-            isComplete: false,
-        }, ...todos]);
+        const todosDb = firebase.database().ref("todosDb");
+        const task = {
+            inputTodo,
+            isComplete: false
+        };
+        todosDb.push(task);
         setInputTodo('');
     };
+
 
     return (
         <section className="todos">
@@ -27,7 +31,18 @@ const CreateTodo = ({ setTodos, todos }) => {
             </section>
         </section >
     );
-
 };
 
 export default CreateTodo;
+
+//old code with json server
+/*
+    // const handleTodoList = (e) => {
+    //     e.preventDefault();
+    //     setTodos([{
+    //         title: inputTodo,
+    //         isComplete: false,
+    //     }, ...todos]);
+    //     setInputTodo('');
+    // };
+*/
