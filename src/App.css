@@ -45,6 +45,10 @@
     transition: .1s ease;
 }
 
+.user__logout--icon {
+    transform: rotate(180deg);
+}
+
 .user__logout:hover {
     transform: scale(1.2);
     transform-origin: top right;

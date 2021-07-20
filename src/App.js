@@ -33,7 +33,7 @@ function App() {
                 className="user__logout"
                 onClick={() => firebase.auth().signOut()}
               >
-                Logout
+                <i class="user__logout--icon far fa-share-square"></i> Logout
               </button>
             </div>
           </section>

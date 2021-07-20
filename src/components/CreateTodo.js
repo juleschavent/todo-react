@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import firebase from "../utils/firebaseConfig";
 
-const CreateTodo = ({ setTodos, todos }) => {
+const CreateTodo = ({todosDb}) => {
 
     const [inputTodo, setInputTodo] = useState('');
 
@@ -11,7 +10,6 @@ const CreateTodo = ({ setTodos, todos }) => {
 
     const handleTodoList = (e) => {
         e.preventDefault();
-        const todosDb = firebase.database().ref("todosDb");
         const task = {
             inputTodo,
             isComplete: false

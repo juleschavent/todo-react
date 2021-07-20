@@ -1,17 +1,30 @@
 import firebase from "../utils/firebaseConfig";
 
-const TodoList = ({ todos, setTodos }) => {
-  // Check if complete
-  const handleIsComplete = (index) => {
-    const newTodos = [...todos];
-    newTodos[index].isComplete = !newTodos[index].isComplete;
-    setTodos(newTodos);
+const TodoList = ({ todos }) => {
+
+  const handleIsComplete = (todo) => {
+    let toUpdate = firebase.database().ref("todosDb").child(todo.id);
+    let tempTodo;
+
+    toUpdate.on("value", (snapshot) => {
+      tempTodo = snapshot.val()
+    });
+
+    if (tempTodo.isComplete === false) {
+      toUpdate.update({
+        isComplete: true
+      });
+    } else {
+      toUpdate.update({
+        isComplete: false
+      });
+    };
   };
 
   // DELETE
-  const deleteItem = (toDelete) => {
-    let test = firebase.database().ref("todosDb").child(toDelete.id);
-    test.remove();
+  const deleteItem = (todo) => {
+    let toDelete = firebase.database().ref("todosDb").child(todo.id);
+    toDelete.remove();
   };
 
   return (
@@ -20,7 +33,7 @@ const TodoList = ({ todos, setTodos }) => {
       {todos &&
         todos.map((todo, index) => (
           <div key={index} className="todo">
-            <div onClick={() => handleIsComplete(index)}>
+            <div onClick={() => handleIsComplete(todo)}>
               <div
                 className={
                   todo.isComplete
@@ -38,7 +51,7 @@ const TodoList = ({ todos, setTodos }) => {
                 {todo.inputTodo}
               </p>
             </div>
-            <i onClick={() => deleteItem(item)} className="todo__delete fas fa-slash">
+            <i onClick={() => deleteItem(todo)} className="todo__delete fas fa-slash">
               <i className="todo__delete--effect fas fa-slash"></i>
             </i>
           </div>
@@ -48,3 +61,13 @@ const TodoList = ({ todos, setTodos }) => {
 };
 
 export default TodoList;
+
+// old code with JSON server
+/*
+  Check if complete
+  const handleIsComplete = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].isComplete = !newTodos[index].isComplete;
+    setTodos(newTodos);
+  };
+*/

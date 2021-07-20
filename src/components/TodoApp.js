@@ -7,11 +7,10 @@ import firebase from "../utils/firebaseConfig";
 
 const TodoApp = () => {
   const [todos, setTodos] = useState(null);
+  const todosDb = firebase.database().ref("todosDb");
 
   //READ
   useEffect(() => {
-    const todosDb = firebase.database().ref("todosDb");
-
     todosDb.on("value", (snapshot) => {
       let previousList = snapshot.val();
       let list = [];
@@ -25,13 +24,14 @@ const TodoApp = () => {
 
   return (
     <div className="container">
-      <CreateTodo todos={todos} setTodos={setTodos} />
+      <CreateTodo todos={todos} setTodos={setTodos} todosDb={todosDb} />
       <section className="todos">
         <TodoList
           todos={todos}
           setTodos={setTodos}
+          todosDb={todosDb}
         />
-        <Aside todos={todos} setTodos={setTodos}/>
+        <Aside todos={todos} setTodos={setTodos} todosDb={todosDb}/>
       </section>
     </div>
   );
